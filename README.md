@@ -32,15 +32,15 @@ This command corresponds to the below script in package.json:
 
 ***Karma Configuration Explanation***
 * <i>Frameworks</i> <br>
-We use Mocha as the testing framework. Mocha is a flexible framework for writing and running tests.
+We use Mocha as the testing framework for writing and running tests. 
 
 * <i>Files in testing environment</i>:
     - '__node_modules/chai/chai.js__': Chai is the assertion library.
-    - '__src/js__': The JavaScript source file of the project.
-    - '__test/specs/**/*.spec.js__': The file with the tests.
+    - '__src/js__': The JavaScript source folder of the project.
+    - '__test/specs/**/*.spec.js__': The files with the tests.
 
 * <i>Preprocessors</i> <br>
-We preprocess '__src/js__' for coverage. This means that before running the tests, Karma will check this file to measure how much of the code is covered by the tests.
+We preprocess '__src/js__' for coverage. This means that before running the tests, Karma will check this folder its files recursively to measure how much of the code is covered by the tests.
 
 * <i>Reporters</i> <br>
     - '__progress__': Reports the progress of the tests in the console.
@@ -67,19 +67,50 @@ The coverage result is shown in the below screenshot for the single source file,
 
 ### Your own coverage tool
 
-<The following is supposed to be repeated for each group member>
+<!-- <The following is supposed to be repeated for each group member>
 
-<Group member name>
+<Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements> -->
+<b>Yeliz Durmaz</b>
 
-<Function 1 name>
+_Replace() in methods.js_
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements>
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/a69ef1ebcc604379442ec91869c850eeebb91864?diff=unified&w=0)
 
-<Provide a screenshot of the coverage results output by the instrumentation>
+![instrumentation for replace()](/readme_files/instrumentation_replace.jpg)
 
-<Function 2 name>
+_getCroppedCanvas in methods.js_
 
-<Provide the same kind of information provided for Function 1>
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/89865230dcba9f28bd1ee363ffa3e55ceb0c2f26)
+
+
+![instrumentation for getCroppedCanvas()](/readme_files/instrumentation_getcroppedcanvas.jpg)
+
+<b>Duc Manh Nguyen</b>
+
+- Function 1 name
+- Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements
+- Provide a screenshot of the coverage results output by the instrumentation
+
+- Function 2 name
+- same info as above
+
+<b>Hums Awan</b>
+
+- Function 1 name
+- Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements
+- Provide a screenshot of the coverage results output by the instrumentation
+
+- Function 2 name
+- same info as above
+
+<b>Aron Visser</b>
+
+- Function 1 name
+- Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements
+- Provide a screenshot of the coverage results output by the instrumentation
+
+- Function 2 name
+- same info as above
 
 ## Coverage improvement
 
