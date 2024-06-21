@@ -1,3 +1,5 @@
+import { printReplaceCoverage } from "../../../src/js/methods";
+
 describe('replace (method)', () => {
   it('should not do anything when url is null or cropper is disabled', (done) => {
     const image = window.createImage();
@@ -96,5 +98,9 @@ describe('replace (method)', () => {
         done();
       },
     });
+  });
+
+  after(() => {
+    printReplaceCoverage();
   });
 });

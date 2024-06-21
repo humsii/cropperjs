@@ -48,16 +48,35 @@ window.getCroppedCanvasCoverage = {
     "branch 16: dstWidth <= 0 || dstHeight <= 0": false,
 };
 
+window.replaceCoverage = {
+    "branch 1: !cropper.disabled": false,
+    "branch 2: cropper.disabled": false,
+    "branch 3: cropper.isImg": false,
+    "branch 4: !cropper.isImg": false,
+    "branch 5: hasSameSize": false,
+    "branch 6: !hasSameSize": false,
+    "branch 7: cropper.ready": false,
+    "branch 8: !cropper.ready": false,
+    "branch 9: cropper.isImg && !hasSameSize": false,
+    "branch 10: !cropper.isImg && !hasSameSize": false,
+}
+
 function printGetCroppedCanvasCoverage() {
-  console.log('GetCroppedCanvas coverage:');
+  console.log('getCroppedCanvas coverage:');
     for (const [branch, hit] of Object.entries(getCroppedCanvasCoverage)) {
       console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
     }
 }
 
+function printReplaceCoverage() {
+  console.log('replace coverage:');
+    for (const [branch, hit] of Object.entries(replaceCoverage)) {
+      console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+    }
+}
+
 export { printGetCroppedCanvasCoverage };
-
-
+export { printReplaceCoverage };
 
 export default {
   // Show the crop box manually
@@ -124,31 +143,47 @@ export default {
    */
   replace(url, hasSameSize = false) {
     if (!this.disabled && url) {
+      window.replaceCoverage["branch 1: !cropper.disabled"] = true;
+
       if (this.isImg) {
+        window.replaceCoverage["branch 3: cropper.isImg"] = true;
         this.element.src = url;
       } 
 
+      window.replaceCoverage["branch 4: !cropper.isImg"] = true;
+
       if (hasSameSize) {
+        window.replaceCoverage["branch 5: hasSameSize"] = true;
         this.url = url;
         this.image.src = url;
 
         if (this.ready) {
+          window.replaceCoverage["branch 7: cropper.ready"] = true;
           this.viewBoxImage.src = url;
 
           forEach(this.previews, (element) => {
             element.getElementsByTagName('img')[0].src = url;
           });
         }
+
+        window.replaceCoverage["branch 8: !cropper.ready"] = true;
       } else {
+        window.replaceCoverage["branch 6: !hasSameSize"] = true;
+        
         if (this.isImg) {
+          window.replaceCoverage["branch 9: cropper.isImg && !hasSameSize"] = true;
           this.replaced = true;
         }
+
+        window.replaceCoverage["branch 10: !cropper.isImg && !hasSameSize"] = true;
 
         this.options.data = null;
         this.uncreate();
         this.load(url);
       }
     }
+
+    window.replaceCoverage["branch 2: cropper.disabled"] = true;
 
     return this;
   },
