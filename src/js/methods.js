@@ -29,7 +29,6 @@ import {
   toggleClass,
 } from './utilities';
 
-// Coverage for getCroppedCanvas
 window.getCroppedCanvasCoverage = {
     "branch 1: !cropper.ready": false,
     "branch 2: cropper.ready": false,
@@ -56,22 +55,12 @@ function printGetCroppedCanvasCoverage() {
     }
 }
 
-// Exporting the function for use in tests
 export { printGetCroppedCanvasCoverage };
 
 
 
 export default {
   // Show the crop box manually
-  // Exporting the function for use in tests
-//printCoverage() {
-//   console.log('Branch coverage:');
-//   for (const [functionName, branches] of Object.entries(window.branchCoverage)) {
-//     for (const [branch, hit] of Object.entries(branches)) {
-//       console.log(`${functionName} - ${branch}: ${hit ? 'hit' : 'not hit'}`);
-//     }
-//   }
-// },
   crop() {
     if (this.ready && !this.cropped && !this.disabled) {
       this.cropped = true;

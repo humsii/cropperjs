@@ -1,4 +1,3 @@
-//import { printCoverage } from '../../src/js/methods.js';
 import { printGetCroppedCanvasCoverage } from '../../../src/js/methods.js';
 
 describe('getCroppedCanvas (method)', () => {
