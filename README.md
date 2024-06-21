@@ -76,14 +76,15 @@ _Replace() in methods.js_
 
 [Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/a69ef1ebcc604379442ec91869c850eeebb91864?diff=unified&w=0)
 
-![instrumentation for replace()](/readme_files/instrumentation_replace.jpg)
+7/10 branches hit
+![instrumentation for replace().before](/readme_files/instrumentation_replace_before.jpg)
 
 _getCroppedCanvas in methods.js_
 
 [Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/89865230dcba9f28bd1ee363ffa3e55ceb0c2f26)
 
-
-![instrumentation for getCroppedCanvas()](/readme_files/instrumentation_getcroppedcanvas.jpg)
+12/16 branches hit
+![instrumentation for getCroppedCanvas().before](/readme_files/instrumentation_getcroppedcanvas_before.jpg)
 
 <b>Duc Manh Nguyen</b>
 
@@ -118,7 +119,62 @@ _getCroppedCanvas in methods.js_
 
 <The following is supposed to be repeated for each group member>
 
-<Group member name>
+<b>Yeliz Durmaz</b>
+
+_replace() in methods.js_
+
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/dc334a38072d85497c63379c1d0f32f08ac5e5d1)
+
+- Previous coverage result (7/10 branches hit)
+![instrumentation for replace().before](/readme_files/instrumentation_replace_before.jpg)
+- New coverage result (10/10 branches hit)
+![instrumentation for replace().after](/readme_files/instrumentation_replace_after.jpg)
+
+The test suite covered 10 of 10 branches, covering 3 more branches compared to the previous test suite. It resulted in a ~43% increase of branch coverage in _replace()_.
+
+_getCroppedCanvas() in methods.js_
+
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/dc334a38072d85497c63379c1d0f32f08ac5e5d1)
+
+- Previous coverage result (12/16 branches hit)
+![instrumentation for getCroppedCanvas().before](/readme_files/instrumentation_getcroppedcanvas_before.jpg)
+- New coverage result (16/16 branches hit)
+
+The test suite covered 16 of 16 branches, covering 4 more branches compared to the previous test suite. It resulted in a ~33% increase of branch coverage in _getCroppedCanvas()_.
+
+<b>Duc Manh Nguyen</b>
+
+<Test 1>
+
+<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+
+<Provide a screenshot of the old coverage results (the same as you already showed above)>
+
+<Provide a screenshot of the new coverage results>
+
+<State the coverage improvement with a number and elaborate on why the coverage is improved>
+
+<Test 2>
+
+<Provide the same kind of information provided for Test 1>
+
+<b>Hums Awan</b>
+
+<Test 1>
+
+<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+
+<Provide a screenshot of the old coverage results (the same as you already showed above)>
+
+<Provide a screenshot of the new coverage results>
+
+<State the coverage improvement with a number and elaborate on why the coverage is improved>
+
+<Test 2>
+
+<Provide the same kind of information provided for Test 1>
+
+<b>Aron Visser</b>
 
 <Test 1>
 
@@ -140,6 +196,22 @@ _getCroppedCanvas in methods.js_
 
 <Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
 
+#### Coverage Before, Overall:
+![coverage_before](/readme_files/cropper_coverage_before.jpg)
+
+#### Coverage Before, Overall:
+![coverage_before](/readme_files/cropper_coverage_after.jpg)
+
+
 ## Statement of individual contributions
 
 <Write what each group member did>
+
+- Aron Visser <br>
+text
+- Duc Manh Nguyen <br>
+text
+- Hums Awan <br>
+text
+- Yeliz Durmaz <br> 
+I focused on improving the coverage of the replace() and getCroppedCanvas() methods in methods.js. I identified branches in it that were not covered (or not taken at all) and improved their coverage. As my teammates helped review some of my code I also did this for my teammates. This helped me understand and unify our implementation for code instrumentation and test creation.
