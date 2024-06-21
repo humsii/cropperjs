@@ -96,7 +96,7 @@ export default {
     if (!this.disabled && url) {
       if (this.isImg) {
         this.element.src = url;
-      }
+      } 
 
       if (hasSameSize) {
         this.url = url;
@@ -730,11 +730,11 @@ export default {
       srcX = 0;
       srcWidth = Math.min(sourceWidth, initialWidth + srcX);
       dstWidth = srcWidth;
-    } else if (srcX <= sourceWidth) {
+    } else {
       dstX = 0;
       srcWidth = Math.min(initialWidth, sourceWidth - srcX);
       dstWidth = srcWidth;
-    }
+    } 
 
     if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
       srcY = 0;
@@ -746,7 +746,7 @@ export default {
       srcY = 0;
       srcHeight = Math.min(sourceHeight, initialHeight + srcY);
       dstHeight = srcHeight;
-    } else if (srcY <= sourceHeight) {
+    } else {
       dstY = 0;
       srcHeight = Math.min(initialHeight, sourceHeight - srcY);
       dstHeight = srcHeight;

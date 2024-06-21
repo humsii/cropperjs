@@ -1,4 +1,18 @@
 describe('getCroppedCanvas (method)', () => {
+  it('should return null when cropper not ready', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        cropper.ready = false;
+        const canvas = cropper.getCroppedCanvas();
+        expect(canvas).to.be.null;
+
+        done();
+      },
+    });
+  });
+
+
   it('should get a canvas with the whole image drew when it is not cropped', (done) => {
     const image = window.createImage();
     const cropper = new Cropper(image, {
@@ -188,6 +202,57 @@ describe('getCroppedCanvas (method)', () => {
         expect(pixelData[1]).to.equal(1, 'green is 1');
         expect(pixelData[2]).to.equal(1, 'blue is 1');
         expect(pixelData[3]).to.equal(255, 'color is opaque');
+        done();
+      },
+    });
+  });
+
+  it('should set imageSmoothingQuality when provided', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        const canvas = cropper.getCroppedCanvas({
+          imageSmoothingQuality: 'high',
+        });
+        const context = canvas.getContext('2d');
+
+        expect(context.imageSmoothingQuality).to.equal('high');
+        done();
+      },
+    });
+  });
+
+  it('should reset dimensions when srcX is out of bounds', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        cropper.cropped = true; 
+        cropper.imageData = { width: 200, height: 200, left: 0, top: 0 };
+        cropper.canvasData = { naturalWidth: 200, naturalHeight: 200 };
+        cropper.cropBoxData = { left: 10, top: 10, width: 100, height: 100 };
+
+        const sourceCanvas = document.createElement('canvas');
+        sourceCanvas.width = 200;
+        sourceCanvas.height = 200;
+
+        cropper.getSourceCanvas = () => sourceCanvas;
+
+        cropper.getData = () => ({
+          x: -150, // srcX <= -initialWidth
+          y: 0,
+          width: 100,
+          height: 100,
+        });
+
+        const canvas = cropper.getCroppedCanvas();
+
+        expect(canvas).to.be.an.instanceof(HTMLCanvasElement);
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+        const isBlankCanvas = imageData.every((pixel) => pixel === 0);
+        expect(isBlankCanvas).to.be.true;
+
         done();
       },
     });
