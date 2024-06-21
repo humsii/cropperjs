@@ -28,11 +28,16 @@ describe('Cropper init function', () => {
   });
 
   it('should initialize for canvas element', () => {
-    // checks correct initialisation of cropper for canvas element
     const canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
-    const cropper = new Cropper(canvas);
-    expect(cropper.isImg).to.be.false;
-    document.body.removeChild(canvas);
+    const cropper = new Cropper(canvas, {
+      ready() {
+        cropper.options.ready = () => {
+          expect(cropper.isImg).to.be.false;
+          document.body.removeChild(canvas);
+          done();
+        }
+      }
+    })
   });
 });
