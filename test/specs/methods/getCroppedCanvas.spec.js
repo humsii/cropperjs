@@ -1,3 +1,6 @@
+//import { printCoverage } from '../../src/js/methods.js';
+import { printGetCroppedCanvasCoverage } from '../../../src/js/methods.js';
+
 describe('getCroppedCanvas (method)', () => {
   it('should return null when cropper not ready', (done) => {
     const image = window.createImage();
@@ -256,5 +259,9 @@ describe('getCroppedCanvas (method)', () => {
         done();
       },
     });
+  });
+
+  after(() => {
+    printGetCroppedCanvasCoverage();
   });
 });
