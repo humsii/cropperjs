@@ -29,6 +29,36 @@ import {
   toggleClass,
 } from './utilities';
 
+window.getCroppedCanvasCoverage = {
+    "branch 1: !cropper.ready": false,
+    "branch 2: cropper.ready": false,
+    "branch 3: !cropper.cropped": false,
+    "branch 4: cropper.cropped": false,
+    "branch 5: ratio !== 1": false,
+    "branch 6: ratio === 1": false,
+    "branch 7: !imageSmoothingQuality": false,
+    "branch 8: imageSmoothingQuality": false,
+    "branch 9: srcX <= -initialWidth || srcX > sourceWidth": false,
+    "branch 10: srcX <= 0": false,
+    "branch 11: srcX <= sourceWidth": false,
+    "branch 12: srcWidth <= 0 for srcY": false,
+    "branch 13: srcY <= 0": false,
+    "branch 14: srcY <= sourceHeight": false,
+    "branch 15: dstWidth > 0 && dstHeight > 0": false,
+    "branch 16: dstWidth <= 0 || dstHeight <= 0": false,
+};
+
+function printGetCroppedCanvasCoverage() {
+  console.log('GetCroppedCanvas coverage:');
+    for (const [branch, hit] of Object.entries(getCroppedCanvasCoverage)) {
+      console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+    }
+}
+
+export { printGetCroppedCanvasCoverage };
+
+
+
 export default {
   // Show the crop box manually
   crop() {
@@ -96,7 +126,7 @@ export default {
     if (!this.disabled && url) {
       if (this.isImg) {
         this.element.src = url;
-      }
+      } 
 
       if (hasSameSize) {
         this.url = url;
@@ -638,16 +668,22 @@ export default {
    */
   getCroppedCanvas(options = {}) {
     if (!this.ready || !window.HTMLCanvasElement) {
+      window.getCroppedCanvasCoverage["branch 1: !cropper.ready"] = true;
       return null;
     }
+
+    window.getCroppedCanvasCoverage["branch 2: cropper.ready"] = true;
 
     const { canvasData } = this;
     const source = getSourceCanvas(this.image, this.imageData, canvasData, options);
 
     // Returns the source canvas if it is not cropped.
     if (!this.cropped) {
+      window.getCroppedCanvasCoverage["branch 3: !cropper.cropped"] = true;
       return source;
     }
+    
+    window.getCroppedCanvasCoverage["branch 4: cropper.cropped"] = true;
 
     let {
       x: initialX,
@@ -658,11 +694,14 @@ export default {
     const ratio = source.width / Math.floor(canvasData.naturalWidth);
 
     if (ratio !== 1) {
+      window.getCroppedCanvasCoverage["branch 5: ratio !== 1"] = true;
       initialX *= ratio;
       initialY *= ratio;
       initialWidth *= ratio;
       initialHeight *= ratio;
     }
+
+    window.getCroppedCanvasCoverage["branch 6: ratio === 1"] = true;
 
     const aspectRatio = initialWidth / initialHeight;
     const maxSizes = getAdjustedSizes({
@@ -702,7 +741,10 @@ export default {
 
     if (imageSmoothingQuality) {
       context.imageSmoothingQuality = imageSmoothingQuality;
+      window.getCroppedCanvasCoverage["branch 7: !imageSmoothingQuality"] = true;
     }
+    
+    window.getCroppedCanvasCoverage["branch 8: imageSmoothingQuality"] = true;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D.drawImage
     const sourceWidth = source.width;
@@ -725,15 +767,18 @@ export default {
       srcWidth = 0;
       dstX = 0;
       dstWidth = 0;
+      window.getCroppedCanvasCoverage["branch 9: srcX <= -initialWidth || srcX > sourceWidth"] = true;
     } else if (srcX <= 0) {
       dstX = -srcX;
       srcX = 0;
       srcWidth = Math.min(sourceWidth, initialWidth + srcX);
       dstWidth = srcWidth;
-    } else if (srcX <= sourceWidth) {
+      window.getCroppedCanvasCoverage["branch 10: srcX <= 0"] = true;
+    } else {
       dstX = 0;
       srcWidth = Math.min(initialWidth, sourceWidth - srcX);
       dstWidth = srcWidth;
+      window.getCroppedCanvasCoverage["branch 11: srcX <= sourceWidth"] = true;
     }
 
     if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
@@ -741,15 +786,18 @@ export default {
       srcHeight = 0;
       dstY = 0;
       dstHeight = 0;
+      window.getCroppedCanvasCoverage["branch 12: srcWidth <= 0 for srcY"] = true;
     } else if (srcY <= 0) {
       dstY = -srcY;
       srcY = 0;
       srcHeight = Math.min(sourceHeight, initialHeight + srcY);
       dstHeight = srcHeight;
-    } else if (srcY <= sourceHeight) {
+      window.getCroppedCanvasCoverage["branch 13: srcY <= 0"] = true;
+    } else {
       dstY = 0;
       srcHeight = Math.min(initialHeight, sourceHeight - srcY);
       dstHeight = srcHeight;
+      window.getCroppedCanvasCoverage["branch 14: srcY <= sourceHeight"] = true;
     }
 
     const params = [
@@ -761,6 +809,7 @@ export default {
 
     // Avoid "IndexSizeError"
     if (dstWidth > 0 && dstHeight > 0) {
+      window.getCroppedCanvasCoverage["branch 15: dstWidth > 0 && dstHeight > 0"] = true;
       const scale = width / initialWidth;
 
       params.push(
@@ -770,6 +819,8 @@ export default {
         dstHeight * scale,
       );
     }
+    
+    window.getCroppedCanvasCoverage["branch 16: dstWidth <= 0 || dstHeight <= 0"] = true;
 
     // All the numerical parameters should be integer for `drawImage`
     // https://github.com/fengyuanchen/cropper/issues/476
@@ -832,3 +883,4 @@ export default {
     return this;
   },
 };
+
