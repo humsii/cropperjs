@@ -235,6 +235,6 @@ text
 - Duc Manh Nguyen <br>
 text
 - Hums Awan <br>
-text
+I focused on improving the coverage of the init() and unbuild() methods in cropper.js by identifying untested branches using our coverage tool. I wrote instrumentation for these functions and created new test suites (init.spec.js and unbuild.spec.js) in the test/specs/methods directory to cover the various conditional paths.
 - Yeliz Durmaz <br> 
 I focused on improving the coverage of the replace() and getCroppedCanvas() methods in methods.js. I identified branches in it that were not covered (or not taken at all) and improved their coverage. As my teammates helped review some of my code I also did this for my teammates. This helped me understand and unify our implementation for code instrumentation and test creation.
