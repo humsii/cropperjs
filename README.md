@@ -97,12 +97,21 @@ _getCroppedCanvas in methods.js_
 
 <b>Hums Awan</b>
 
-- Function 1 name
-- Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements
-- Provide a screenshot of the coverage results output by the instrumentation
+_init() in cropper.js_
 
-- Function 2 name
-- same info as above
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
+
+3/6 branches hit
+
+![instrumentation for init().before](/readme_files/instrumentation_init_before.png)
+
+_unbuild() in cropper.js_
+
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
+
+2/3 branches hit
+
+![instrumentation for unbuild().before](/readme_files/instrumentation_unbuild_before.png)
 
 <b>Aron Visser</b>
 
@@ -160,19 +169,33 @@ The test suite covered 16 of 16 branches, covering 4 more branches compared to t
 
 <b>Hums Awan</b>
 
-<Test 1>
+_init() in cropper.js_
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
 
-<Provide a screenshot of the old coverage results (the same as you already showed above)>
+- Previous coverage result (3/6 branches hit)
 
-<Provide a screenshot of the new coverage results>
+    ![instrumentation for init().before](/readme_files/instrumentation_init_before.png)
 
-<State the coverage improvement with a number and elaborate on why the coverage is improved>
+- New coverage result (6/6 branches hit)
 
-<Test 2>
+    ![instrumentation for init().after](/readme_files/instrumentation_init_after.png)
 
-<Provide the same kind of information provided for Test 1>
+The test suite covered 6 of 6 branches, covering 3 more branches compared to the previous test suite. It resulted in a ~50% increase of branch coverage in _init()_.
+
+_unbuild() in cropper.js_
+
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
+
+- Previous coverage result (2/3 branches hit)
+
+    ![instrumentation for unbuild().before](/readme_files/instrumentation_unbuild_before.png)
+
+- New coverage result (3/3 branches hit)
+
+    ![instrumentation for unbuild().after](/readme_files/instrumentation_unbuild_after.png)
+
+The test suite covered 3 of 3 branches, covering 1 more branch compared to the previous test suite. It resulted in a ~33% increase of branch coverage in _unbuild()_.
 
 <b>Aron Visser</b>
 
