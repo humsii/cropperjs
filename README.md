@@ -63,7 +63,7 @@ npm install
 #### Coverage Result
 
 The coverage result is shown in the below screenshot for the single source file, '__/src/index.js__'
-![coverage_before](<TODO>)
+![coverage_before](/readme_files/cropper_coverage_before.jpg)
 
 ### Your own coverage tool
 
