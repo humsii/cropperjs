@@ -1,6 +1,7 @@
-import Cropper from '../../../src/js/cropper'; // Adjust import based on actual file location
+import Cropper from '../../../src/js/cropper';
+import { printUnbuildCoverage } from '../../../src/js/cropper';
 
-describe('Cropper unbuild function', () => {
+describe('unbuild (method)', () => {
   let element; let
     cropperInstance;
 
@@ -13,6 +14,10 @@ describe('Cropper unbuild function', () => {
   afterEach(() => {
     document.body.removeChild(element);
     cropperInstance = null;
+  });
+
+  after(() => {
+    printUnbuildCoverage();
   });
 
   it('should return early if not ready', () => {

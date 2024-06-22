@@ -40,25 +40,38 @@ import {
 
 const AnotherCropper = WINDOW.Cropper;
 
-const initCoverage = {
-  1001: false,
-  1002: false,
-  1003: false,
-  1004: false,
-  1005: false,
+window.initCoverage = {
+  "branch 1: element[NAMESPACE] is defined": false,
+  "branch 2: element[NAMESPACE] is not defined": false,
+  "branch 3: tagName is img": false,
+  "branch 4: tagname is canvas": false,
+  "branch 5: img is blank": false,
+  "branch 6: img is not blank": false,
 };
 
-const unbuildCoverage = {
-  1001: false,
-  1002: false,
-  1003: false,
+window.unbuildCoverage = {
+  "branch 1: !this,ready": false,
+  "branch 2: this.ready": false,
+  "branch 3: parentNode exists": false,
 };
 
-// Function to log coverage information at the end
-window.addEventListener('beforeunload', () => {
-  console.log('init() Coverage:', initCoverage);
-  console.log('unbuild() Coverage:', unbuildCoverage);
-});
+function printInitCoverage() {
+  console.log('init coverage:');
+  for (const [branch, hit] of Object.entries(window.initCoverage)) {
+    console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+  }
+}
+
+function printUnbuildCoverage() {
+  console.log('unbuild coverage:');
+  for (const [branch, hit] of Object.entries(window.unbuildCoverage)) {
+    console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+  }
+}
+
+export { printInitCoverage };
+export { printUnbuildCoverage };
+
 
 class Cropper {
   /**
@@ -90,15 +103,15 @@ class Cropper {
     let url;
 
     if (element[NAMESPACE]) {
-      initCoverage[1001] = true;
+      window.initCoverage["branch 1: element[NAMESPACE] is defined"] = true;
       return;
     }
 
-    initCoverage[1002] = true;
+    window.initCoverage["branch 2: element[NAMESPACE] is not defined"] = true;
     element[NAMESPACE] = this;
 
     if (tagName === 'img') {
-      initCoverage[1003] = true;
+      window.initCoverage["branch 3: tagName is img"] = true;
       this.isImg = true;
 
       // e.g.: "img/picture.jpg"
@@ -107,14 +120,15 @@ class Cropper {
 
       // Stop when it's a blank image
       if (!url) {
-        initCoverage[1004] = true;
+        window.initCoverage["branch 5: img is blank"] = true;
         return;
       }
+      window.initCoverage["branch 6: img is not blank"] = true;
 
       // e.g.: "https://example.com/img/picture.jpg"
       url = element.src;
     } else if (tagName === 'canvas' && window.HTMLCanvasElement) {
-      initCoverage[1005] = true;
+      window.initCoverage["branch 4: tagname is canvas"] = true;
       url = element.toDataURL();
     }
 
@@ -423,10 +437,10 @@ class Cropper {
 
   unbuild() {
     if (!this.ready) {
-      unbuildCoverage[1001] = true;
+      window.unbuildCoverage["branch 1: !this.ready"] = true;
       return;
     }
-    unbuildCoverage[1002] = true;
+    window.unbuildCoverage["branch 2: this.ready"] = true;
 
     this.ready = false;
     this.unbind();
@@ -435,7 +449,7 @@ class Cropper {
     const { parentNode } = this.cropper;
 
     if (parentNode) {
-      unbuildCoverage[1003] = true;
+      window.unbuildCoverage["branch 3: parentNode exists"] = true;
       parentNode.removeChild(this.cropper);
     }
 

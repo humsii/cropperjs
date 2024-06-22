@@ -1,6 +1,7 @@
 import Cropper from '../../../src/js/cropper';
+import { printInitCoverage } from '../../../src/js/cropper';
 
-describe('Cropper init function', () => {
+describe('init (method)', () => {
   let element;
 
   beforeEach(() => {
@@ -12,6 +13,10 @@ describe('Cropper init function', () => {
   afterEach(() => {
     // remove created image element
     document.body.removeChild(element);
+  });
+
+  after(() => {
+    printInitCoverage();
   });
 
   it('should not reinitialize if already initialized', () => {
@@ -27,7 +32,7 @@ describe('Cropper init function', () => {
     expect(cropper.originalUrl).to.equal('');
   });
 
-  it('should initialize for canvas element', () => {
+  it('should initialize for canvas element', (done) => {
     const canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
     const cropper = new Cropper(canvas, {
