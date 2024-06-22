@@ -1,4 +1,14 @@
+import { branchCoverageMethods } from "../../../src/js/methods";
+import Cropper from "../../../src/js/cropper";
+import { NAMESPACE } from "../../../src/js/constants";
+
 describe('destroy (method)', () => {
+    beforeEach(() => {
+    // Reset the branchCoverageMethods before each test
+    branchCoverageMethods.elementIsNotNamespace = false;
+    branchCoverageMethods.isImageAndReplaced = false;
+  });
+  
   it('should destroy before ready', () => {
     const image = window.createImage();
     const cropper = new Cropper(image, {
@@ -26,5 +36,38 @@ describe('destroy (method)', () => {
         done();
       },
     });
+  });
+  
+  it('should cover branch where element is not namespace', () => {
+    const image = window.createImage();
+    const cropper = new Cropper(image);
+
+    delete image[NAMESPACE];
+    cropper.destroy();
+    expect(branchCoverageMethods.elementIsNotNamespace).to.be.true;
+    expect(image.cropper).to.be.not.exist;
+  });
+
+  it('should cover branch where image is replaced', (done) => {
+    const image = window.createImage();
+    const originalUrl = image.src;
+    const cropper = new Cropper(image, {
+      ready() {
+        this.replaced = true;
+        this.originalUrl = originalUrl;
+        this.isImg = true;
+
+        cropper.destroy();
+
+        expect(branchCoverageMethods.isImageAndReplaced).to.be.true;
+        expect(image.src).to.equal(originalUrl);
+        expect(image.cropper).to.be.not.exist;
+        done();
+      },
+    });
+
+    cropper.replaced = true;
+    cropper.isImg = true;
+    cropper.originalUrl = originalUrl;
   });
 });
