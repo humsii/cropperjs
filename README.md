@@ -4,7 +4,7 @@
 
 Name: CropperJS
 
-URL: [<TODO>](https://github.com/fengyuanchen/cropperjs)
+URL: [Link to original repository](https://github.com/fengyuanchen/cropperjs)
 
 Number of lines of code and the tool used to count it: nloc is 14,139 and Lizard was used to count
 
