@@ -14,9 +14,56 @@ Programming language: Javascript
 
 ### Existing tool
 
-<Inform the name of the existing tool that was executed and how it was executed>
+To measure the coverage of the tests, we used Karma with the ChromeHeadless browser and coverage reporter. The command was executed as follows:
 
-<Show the coverage results provided by the existing tool with a screenshot>
+``` javascript
+npm test
+```
+
+This command corresponds to the below script in package.json:
+
+``` json
+"scripts": {
+...
+"test": "karma start",
+...
+}
+```
+
+***Karma Configuration Explanation***
+* <i>Frameworks</i> <br>
+We use Mocha as the testing framework. Mocha is a flexible framework for writing and running tests.
+
+* <i>Files in testing environment</i>:
+    - '__node_modules/chai/chai.js__': Chai is the assertion library.
+    - '__src/index.js__': The JavaScript source file of the project.
+    - '__test/specs/**/*.spec.js__': The file with the tests.
+
+* <i>Preprocessors</i> <br>
+We preprocess '__src/index.js__' for coverage. This means that before running the tests, Karma will check this file to measure how much of the code is covered by the tests.
+
+* <i>Reporters</i> <br>
+    - '__progress__': Reports the progress of the tests in the console.
+    - '__coverage__': Generates a code coverage report.
+
+* <i>Browsers</i> <br>
+We use '__ChromeHeadless__', a headless browser, to run the tests. This allows for running the tests without needing a graphical user interface.
+
+* <i>Coverage Reporter</i> <br>
+    - type: '__html__': Generates the coverage report in HTML format.
+    - dir: '__coverage/__': Outputs the coverage report to the coverage/ directory.
+
+
+Of course, to be able to run these commands you must be sure you installed all dependencies of the project, which includes Karma, ChromeHeadless, Mocha, Chai, and other related packages in package.json. These required dependencies can all be installed at once by running the following command:
+
+``` javascript
+npm install
+```
+
+#### Coverage Result
+
+The coverage result is shown in the below screenshot for the single source file, '__/src/index.js__'
+![coverage_before](<TODO>)
 
 ### Your own coverage tool
 
