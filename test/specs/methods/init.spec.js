@@ -32,7 +32,7 @@ describe('init (method)', () => {
     expect(cropper.originalUrl).to.equal('');
   });
 
-  it('should initialize for canvas element', (done) => {
+  it('should initialize for canvas element', () => {
     const canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
     const cropper = new Cropper(canvas, {
