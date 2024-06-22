@@ -73,16 +73,14 @@ window.replaceCoverage = {
 
 window.destroyBranchCoverage = {
     "branch 1: element is not namespace": false,
-    "branch 2: element is namespace:": false,
+    "branch 2: element is namespace": false,
     "branch 3: is image and replaced": false,
     "branch 4: is not image and replaced": false,
 }
 
 window.setCropBoxDataBranchCoverage = {
     "branch 1: widthChanged": false,
-    "branch 2: !widthChanged": false,
-    "branch 3: heightChanged": false,
-    "branch 4: !heightChanged": false,
+    "branch 2: heightChanged": false,
 }
 
 function printGetCroppedCanvasCoverage() {
@@ -256,17 +254,17 @@ export default {
     const { element } = this;
 
     if (!element[NAMESPACE]) {
-      window.destroyBranchCoverage["branch 1: element is not NAMESPACE"] = true;
-      destroyCoverage.elementIsNotNamespace = true;
+      window.destroyBranchCoverage["branch 1: element is not namespace"] = true;
+      // destroyCoverage.elementIsNotNamespace = true;
       return this;
     }
 
-    window.destroyBranchCoverage["branch 2: element is NAMESPACE"] = true;
+    window.destroyBranchCoverage["branch 2: element is namespace"] = true;
     element[NAMESPACE] = undefined;
 
     if (this.isImg && this.replaced) {
       window.destroyBranchCoverage["branch 3: is image and replaced"] = true;
-      destroyCoverage.isImageAndReplaced = true
+      // destroyCoverage.isImageAndReplaced = true;
       element.src = this.originalUrl;
     }
     window.destroyBranchCoverage["branch 4: is not image and replaced"] = true;
@@ -731,13 +729,11 @@ export default {
       if (aspectRatio) {
         if (widthChanged) {
           window.setCropBoxDataBranchCoverage["branch 1: widthChanged"] = true;
-          window.setCropBoxDataBranchCoverage["branch 4: !heightChanged"] = true;
-          setCropBoxDataCoverage.widthChanged = true;
+          // setCropBoxDataCoverage.widthChanged = true;
           cropBoxData.height = cropBoxData.width / aspectRatio;
         } else if (heightChanged) {
-          window.setCropBoxDataBranchCoverage["branch 3: heightChanged"] = true;
-          window.setCropBoxDataBranchCoverage["branch 2: !widthChanged"] = true;
-          setCropBoxDataCoverage.heightChanged = true;
+          window.setCropBoxDataBranchCoverage["branch 2: heightChanged"] = true;
+          // setCropBoxDataCoverage.heightChanged = true;
           cropBoxData.width = cropBoxData.height * aspectRatio;
         }
       }
