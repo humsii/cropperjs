@@ -250,7 +250,7 @@ The test suite covered 3 of 3 branches, covering 1 more branch compared to the p
 - Aron Visser <br>
 text
 - Duc Manh Nguyen <br>
-text
+I focused on improving the coverage of the destroy() and setCropBoxData() methods in methods.js. I assisted in finding a valid repository and analyzing the initial coverage percentage of the code. I wrote the intrumentation and new tests for the methods I mentioned. I helped me teammates review their commits and vice versa. This provided insights for me regarding the best way to implement our coverage tool in the most effective way possible. 
 - Hums Awan <br>
 I focused on improving the coverage of the init() and unbuild() methods in cropper.js by identifying untested branches using our coverage tool. I wrote instrumentation for these functions and created new test suites (init.spec.js and unbuild.spec.js) in the test/specs/methods directory to cover the various conditional paths.
 - Yeliz Durmaz <br> 
