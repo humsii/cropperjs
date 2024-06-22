@@ -29,6 +29,11 @@ import {
   toggleClass,
 } from './utilities';
 
+export const branchCoverageMethods = {
+  elementIsNotNamespace: false,
+  isImageAndReplaced: false
+};
+
 export default {
   // Show the crop box manually
   crop() {
@@ -151,12 +156,14 @@ export default {
     const { element } = this;
 
     if (!element[NAMESPACE]) {
+      branchCoverageMethods.elementIsNotNamespace = true;
       return this;
     }
 
     element[NAMESPACE] = undefined;
 
     if (this.isImg && this.replaced) {
+      branchCoverageMethods.isImageAndReplaced = true;
       element.src = this.originalUrl;
     }
 
