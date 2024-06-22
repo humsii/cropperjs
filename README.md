@@ -90,7 +90,7 @@ _getCroppedCanvas in methods.js_
 
 _destroy() in methods.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)(should uncomment out test lines)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)(should comment out test lines)
 
 1/4 branches hit
 
@@ -98,7 +98,7 @@ _destroy() in methods.js_
 
 _setCropBoxData() in methods.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)(should uncomment out test lines)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)(should comment out test lines)
 
 0/2 branches hit (of the uncovered branches, where branch 1 and 4 is one branch and 2 and 3 is another)
 
