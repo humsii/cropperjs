@@ -17,6 +17,14 @@ import {
   removeListener,
 } from './utilities';
 
+export const branchCoverage = {
+  unbind_cropstart: false,
+  unbind_cropmove: false,
+  unbind_cropend: false,
+  unbind_crop: false,
+  unbind_zoom: false
+};
+
 export default {
   bind() {
     const { element, options, cropper } = this;
@@ -75,22 +83,27 @@ export default {
 
     if (isFunction(options.cropstart)) {
       removeListener(element, EVENT_CROP_START, options.cropstart);
+      branchCoverage.unbind_cropstart = true;
     }
 
     if (isFunction(options.cropmove)) {
       removeListener(element, EVENT_CROP_MOVE, options.cropmove);
+      branchCoverage.unbind_cropmove = true;
     }
 
     if (isFunction(options.cropend)) {
       removeListener(element, EVENT_CROP_END, options.cropend);
+      branchCoverage.unbind_cropend = true;
     }
 
     if (isFunction(options.crop)) {
       removeListener(element, EVENT_CROP, options.crop);
+      branchCoverage.unbind_crop = true;
     }
 
     if (isFunction(options.zoom)) {
       removeListener(element, EVENT_ZOOM, options.zoom);
+      branchCoverage.unbind_zoom = true;
     }
 
     removeListener(cropper, EVENT_POINTER_DOWN, this.onCropStart);
