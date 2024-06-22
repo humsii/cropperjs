@@ -93,6 +93,7 @@ _destroy() in methods.js_
 [Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)(should uncomment out test lines)
 
 1/4 branches hit
+
 ![instrumentation for destroy().before](/readme_files/instrumentation_destroy_before.png)
 
 _setCropBoxData() in methods.js_
@@ -100,6 +101,7 @@ _setCropBoxData() in methods.js_
 [Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)(should uncomment out test lines)
 
 0/2 branches hit (of the uncovered branches, where branch 1 and 4 is one branch and 2 and 3 is another)
+
 ![instrumentation for destroy().before](/readme_files/instrumentation_setCropBoxData_before.png)
 
 <b>Hums Awan</b>
@@ -160,19 +162,23 @@ The test suite covered 16 of 16 branches, covering 4 more branches compared to t
 
 <b>Duc Manh Nguyen</b>
 
-<Test 1>
+_destroy() in methods.js_
 
-<Show a patch (diff) or a link to a commit made in your forked repository that shows the new/enhanced test>
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)
 
-<Provide a screenshot of the old coverage results (the same as you already showed above)>
+- Previous coverage result (1/4 branches hit)
+![instrumentation for replace().before](/readme_files/instrumentation_destroy_before.png)
+- New coverage result (4/4 branches hit)
+![instrumentation for replace().after](/readme_files/instrumentation_destroy_after.png)
 
-<Provide a screenshot of the new coverage results>
+_setCropBoxData() in methods.js_
 
-<State the coverage improvement with a number and elaborate on why the coverage is improved>
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)
 
-<Test 2>
-
-<Provide the same kind of information provided for Test 1>
+- Previous coverage result (0/2 branches hit)
+![instrumentation for replace().before](/readme_files/instrumentation_setCropBoxData_before.png)
+- New coverage result (2/2 branches hit)
+![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after.png)
 
 <b>Hums Awan</b>
 
