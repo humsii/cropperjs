@@ -34,6 +34,11 @@ export const destroyCoverage = {
   isImageAndReplaced: false
 };
 
+export const setCropBoxDataCoverage = {
+  widthChanged: false,
+  heightChanged: false,
+}
+
 window.getCroppedCanvasCoverage = {
     "branch 1: !cropper.ready": false,
     "branch 2: cropper.ready": false,
@@ -67,10 +72,17 @@ window.replaceCoverage = {
 }
 
 window.destroyBranchCoverage = {
-    "destroy branch 1: element is not namespace": false,
-    "destroy branch 2: element is namespace:": false,
-    "destroy branch 3: is image and replaced": false,
-    "destroy branch 4: is not image and replaced": false,
+    "branch 1: element is not namespace": false,
+    "branch 2: element is namespace:": false,
+    "branch 3: is image and replaced": false,
+    "branch 4: is not image and replaced": false,
+}
+
+window.setCropBoxDataBranchCoverage = {
+    "branch 1: widthChanged": false,
+    "branch 2: !widthChanged": false,
+    "branch 3: heightChanged": false,
+    "branch 4: !heightChanged": false,
 }
 
 function printGetCroppedCanvasCoverage() {
@@ -94,9 +106,17 @@ function printDestroyCoverage() {
     }
 }
 
+function printSetCropBoxDataCoverage() {
+  console.log('setCropBoxData coverage:');
+    for (const [branch, hit] of Object.entries(setCropBoxDataBranchCoverage)) {
+      console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+    }
+}
+
 export { printGetCroppedCanvasCoverage };
 export { printReplaceCoverage };
 export { printDestroyCoverage };
+export { printSetCropBoxDataCoverage };
 
 export default {
   // Show the crop box manually
@@ -236,20 +256,20 @@ export default {
     const { element } = this;
 
     if (!element[NAMESPACE]) {
-      window.destroyBranchCoverage["destroy branch 1: element is not NAMESPACE"] = true;
+      window.destroyBranchCoverage["branch 1: element is not NAMESPACE"] = true;
       destroyCoverage.elementIsNotNamespace = true;
       return this;
     }
 
-    window.destroyBranchCoverage["destroy branch 2: element is NAMESPACE"] = true;
+    window.destroyBranchCoverage["branch 2: element is NAMESPACE"] = true;
     element[NAMESPACE] = undefined;
 
     if (this.isImg && this.replaced) {
-      window.destroyBranchCoverage["destroy branch 3: is image and replaced"] = true;
+      window.destroyBranchCoverage["branch 3: is image and replaced"] = true;
       destroyCoverage.isImageAndReplaced = true
       element.src = this.originalUrl;
     }
-    window.destroyBranchCoverage["destroy branch 4: is not image and replaced"] = true;
+    window.destroyBranchCoverage["branch 4: is not image and replaced"] = true;
 
     this.uncreate();
     return this;
@@ -710,8 +730,14 @@ export default {
 
       if (aspectRatio) {
         if (widthChanged) {
+          window.setCropBoxDataBranchCoverage["branch 1: widthChanged"] = true;
+          window.setCropBoxDataBranchCoverage["branch 4: !heightChanged"] = true;
+          setCropBoxDataCoverage.widthChanged = true;
           cropBoxData.height = cropBoxData.width / aspectRatio;
         } else if (heightChanged) {
+          window.setCropBoxDataBranchCoverage["branch 3: heightChanged"] = true;
+          window.setCropBoxDataBranchCoverage["branch 2: !widthChanged"] = true;
+          setCropBoxDataCoverage.heightChanged = true;
           cropBoxData.width = cropBoxData.height * aspectRatio;
         }
       }
