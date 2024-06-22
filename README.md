@@ -90,19 +90,19 @@ _getCroppedCanvas in methods.js_
 
 _destroy() in methods.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)(should comment out test lines)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/96ac02905d4a680ce7d91f22e799a6933f962c88)
 
-1/4 branches hit
+2/4 branches hit
 
-![instrumentation for destroy().before](/readme_files/instrumentation_destroy_before.png)
+![instrumentation for destroy().before](/readme_files/instrumentation_destroy_before_v2.png)
 
 _setCropBoxData() in methods.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)(should comment out test lines)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/96ac02905d4a680ce7d91f22e799a6933f962c88)
 
-0/2 branches hit (of the uncovered branches, where branch 1 and 4 is one branch and 2 and 3 is another)
+0/2 branches hit
 
-![instrumentation for destroy().before](/readme_files/instrumentation_setCropBoxData_before.png)
+![instrumentation for destroy().before](/readme_files/instrumentation_setCropBoxData_before_v2.png)
 
 <b>Hums Awan</b>
 
@@ -164,25 +164,25 @@ The test suite covered 16 of 16 branches, covering 4 more branches compared to t
 
 _destroy() in methods.js_
 
-[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/3cdabe15987060ee49967b9f4b9e14249eef46d5)
 
-- Previous coverage result (1/4 branches hit)
+- Previous coverage result (2/4 branches hit)
 
-![instrumentation for replace().before](/readme_files/instrumentation_destroy_before.png)
+![instrumentation for replace().before](/readme_files/instrumentation_destroy_before_v2.png)
 - New coverage result (4/4 branches hit)
 
-![instrumentation for replace().after](/readme_files/instrumentation_destroy_after.png)
+![instrumentation for replace().after](/readme_files/instrumentation_destroy_after_v2.png)
 
 _setCropBoxData() in methods.js_
 
-[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)
+[Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/3cdabe15987060ee49967b9f4b9e14249eef46d5)
 
 - Previous coverage result (0/2 branches hit)
 
-![instrumentation for replace().before](/readme_files/instrumentation_setCropBoxData_before.png)
+![instrumentation for replace().before](/readme_files/instrumentation_setCropBoxData_before_v2.png)
 - New coverage result (2/2 branches hit)
 
-![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after.png)
+![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after_v2.png)
 
 <b>Hums Awan</b>
 
