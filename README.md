@@ -36,11 +36,11 @@ We use Mocha as the testing framework. Mocha is a flexible framework for writing
 
 * <i>Files in testing environment</i>:
     - '__node_modules/chai/chai.js__': Chai is the assertion library.
-    - '__src/index.js__': The JavaScript source file of the project.
+    - '__src/js__': The JavaScript source file of the project.
     - '__test/specs/**/*.spec.js__': The file with the tests.
 
 * <i>Preprocessors</i> <br>
-We preprocess '__src/index.js__' for coverage. This means that before running the tests, Karma will check this file to measure how much of the code is covered by the tests.
+We preprocess '__src/js__' for coverage. This means that before running the tests, Karma will check this file to measure how much of the code is covered by the tests.
 
 * <i>Reporters</i> <br>
     - '__progress__': Reports the progress of the tests in the console.
@@ -62,7 +62,7 @@ npm install
 
 #### Coverage Result
 
-The coverage result is shown in the below screenshot for the single source file, '__/src/index.js__'
+The coverage result is shown in the below screenshot for the single source file, '__/src/js__'
 ![coverage_before](/readme_files/cropper_coverage_before.jpg)
 
 ### Your own coverage tool
