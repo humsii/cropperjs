@@ -29,6 +29,11 @@ import {
   toggleClass,
 } from './utilities';
 
+export const destroyCoverage = {
+  elementIsNotNamespace: false,
+  isImageAndReplaced: false
+};
+
 window.getCroppedCanvasCoverage = {
     "branch 1: !cropper.ready": false,
     "branch 2: cropper.ready": false,
@@ -61,6 +66,13 @@ window.replaceCoverage = {
     "branch 10: !cropper.isImg && !hasSameSize": false,
 }
 
+window.destroyBranchCoverage = {
+    "destroy branch 1: element is not namespace": false,
+    "destroy branch 2: element is namespace:": false,
+    "destroy branch 3: is image and replaced": false,
+    "destroy branch 4: is not image and replaced": false,
+}
+
 function printGetCroppedCanvasCoverage() {
   console.log('getCroppedCanvas coverage:');
     for (const [branch, hit] of Object.entries(getCroppedCanvasCoverage)) {
@@ -75,8 +87,16 @@ function printReplaceCoverage() {
     }
 }
 
+function printDestroyCoverage() {
+  console.log('destroy coverage:');
+    for (const [branch, hit] of Object.entries(destroyBranchCoverage)) {
+      console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+    }
+}
+
 export { printGetCroppedCanvasCoverage };
 export { printReplaceCoverage };
+export { printDestroyCoverage };
 
 export default {
   // Show the crop box manually
@@ -148,7 +168,7 @@ export default {
       if (this.isImg) {
         window.replaceCoverage["branch 3: cropper.isImg"] = true;
         this.element.src = url;
-      } 
+      }
 
       window.replaceCoverage["branch 4: !cropper.isImg"] = true;
 
@@ -169,7 +189,7 @@ export default {
         window.replaceCoverage["branch 8: !cropper.ready"] = true;
       } else {
         window.replaceCoverage["branch 6: !hasSameSize"] = true;
-        
+
         if (this.isImg) {
           window.replaceCoverage["branch 9: cropper.isImg && !hasSameSize"] = true;
           this.replaced = true;
@@ -216,14 +236,20 @@ export default {
     const { element } = this;
 
     if (!element[NAMESPACE]) {
+      window.destroyBranchCoverage["destroy branch 1: element is not NAMESPACE"] = true;
+      destroyCoverage.elementIsNotNamespace = true;
       return this;
     }
 
+    window.destroyBranchCoverage["destroy branch 2: element is NAMESPACE"] = true;
     element[NAMESPACE] = undefined;
 
     if (this.isImg && this.replaced) {
+      window.destroyBranchCoverage["destroy branch 3: is image and replaced"] = true;
+      destroyCoverage.isImageAndReplaced = true
       element.src = this.originalUrl;
     }
+    window.destroyBranchCoverage["destroy branch 4: is not image and replaced"] = true;
 
     this.uncreate();
     return this;
@@ -717,7 +743,7 @@ export default {
       window.getCroppedCanvasCoverage["branch 3: !cropper.cropped"] = true;
       return source;
     }
-    
+
     window.getCroppedCanvasCoverage["branch 4: cropper.cropped"] = true;
 
     let {
@@ -778,7 +804,7 @@ export default {
       context.imageSmoothingQuality = imageSmoothingQuality;
       window.getCroppedCanvasCoverage["branch 7: !imageSmoothingQuality"] = true;
     }
-    
+
     window.getCroppedCanvasCoverage["branch 8: imageSmoothingQuality"] = true;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D.drawImage
@@ -854,7 +880,7 @@ export default {
         dstHeight * scale,
       );
     }
-    
+
     window.getCroppedCanvasCoverage["branch 16: dstWidth <= 0 || dstHeight <= 0"] = true;
 
     // All the numerical parameters should be integer for `drawImage`
