@@ -1,4 +1,12 @@
+import { setCropBoxDataCoverage, printSetCropBoxDataCoverage } from '../../../src/js/methods.js';
+import Cropper from '../../../src/js/cropper';
+
 describe('setCropBoxData (method)', () => {
+  beforeEach(() => {
+    setCropBoxDataCoverage.widthChanged = false;
+    setCropBoxDataCoverage.heightChanged = false;
+  });
+
   it('should change the positions only', (done) => {
     const image = window.createImage();
     const cropper = new Cropper(image, {
@@ -35,5 +43,53 @@ describe('setCropBoxData (method)', () => {
         done();
       },
     });
+  });
+
+  it('should cover branch where width is changed and height is not changed', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        // Initialize with initial crop box data
+        cropper.cropped = true;
+        cropper.cropBoxData = {
+          width: 100,
+          height: 100,
+        };
+        cropper.options.aspectRatio = 1;
+
+        // Set new width to trigger widthChanged branch
+        cropper.setCropBoxData({ width: 200 });
+
+        expect(setCropBoxDataCoverage.widthChanged).to.be.true;
+        expect(setCropBoxDataCoverage.heightChanged).to.be.false;
+        done();
+      },
+    });
+  });
+
+  it('should cover branch where height is changed and width is not changed', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        // Initialize with initial crop box data
+        cropper.cropped = true;
+        cropper.cropBoxData = {
+          width: 100,
+          height: 100,
+        };
+        cropper.options.aspectRatio = 1;
+
+        // Set new height to trigger heightChanged branch
+        cropper.setCropBoxData({ height: 200 });
+
+        expect(setCropBoxDataCoverage.heightChanged).to.be.true;
+        expect(setCropBoxDataCoverage.widthChanged).to.be.false;
+        done();
+      },
+    });
+  });
+
+  after(() => {
+    printSetCropBoxDataCoverage();
   });
 });
