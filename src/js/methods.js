@@ -255,7 +255,7 @@ export default {
 
     if (!element[NAMESPACE]) {
       window.destroyBranchCoverage["branch 1: element is not namespace"] = true;
-      // destroyCoverage.elementIsNotNamespace = true;
+      destroyCoverage.elementIsNotNamespace = true;
       return this;
     }
 
@@ -264,7 +264,7 @@ export default {
 
     if (this.isImg && this.replaced) {
       window.destroyBranchCoverage["branch 3: is image and replaced"] = true;
-      // destroyCoverage.isImageAndReplaced = true;
+      destroyCoverage.isImageAndReplaced = true;
       element.src = this.originalUrl;
     }
     window.destroyBranchCoverage["branch 4: is not image and replaced"] = true;
@@ -729,11 +729,11 @@ export default {
       if (aspectRatio) {
         if (widthChanged) {
           window.setCropBoxDataBranchCoverage["branch 1: widthChanged"] = true;
-          // setCropBoxDataCoverage.widthChanged = true;
+          setCropBoxDataCoverage.widthChanged = true;
           cropBoxData.height = cropBoxData.width / aspectRatio;
         } else if (heightChanged) {
           window.setCropBoxDataBranchCoverage["branch 2: heightChanged"] = true;
-          // setCropBoxDataCoverage.heightChanged = true;
+          setCropBoxDataCoverage.heightChanged = true;
           cropBoxData.width = cropBoxData.height * aspectRatio;
         }
       }
