@@ -32,7 +32,7 @@ describe('Cropper init function', () => {
     const canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
     const cropper = new Cropper(canvas);
-    expect(cropper.isImg).to.be.undefined;
+    expect(cropper.isImg).to.be.false;
     document.body.removeChild(canvas);
   });
 });
