@@ -167,8 +167,10 @@ _destroy() in methods.js_
 [Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)
 
 - Previous coverage result (1/4 branches hit)
+
 ![instrumentation for replace().before](/readme_files/instrumentation_destroy_before.png)
 - New coverage result (4/4 branches hit)
+
 ![instrumentation for replace().after](/readme_files/instrumentation_destroy_after.png)
 
 _setCropBoxData() in methods.js_
@@ -176,8 +178,10 @@ _setCropBoxData() in methods.js_
 [Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)
 
 - Previous coverage result (0/2 branches hit)
+
 ![instrumentation for replace().before](/readme_files/instrumentation_setCropBoxData_before.png)
 - New coverage result (2/2 branches hit)
+
 ![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after.png)
 
 <b>Hums Awan</b>
