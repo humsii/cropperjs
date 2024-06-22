@@ -88,12 +88,19 @@ _getCroppedCanvas in methods.js_
 
 <b>Duc Manh Nguyen</b>
 
-- Function 1 name
-- Show a patch (diff) or a link to a commit made in your forked repository that shows the instrumented code to gather coverage measurements
-- Provide a screenshot of the coverage results output by the instrumentation
+_destroy() in methods.js_
 
-- Function 2 name
-- same info as above
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/04421a8263e6893f28e18d046f3b0eb11281b6fa)(should uncomment out test lines)
+
+1/4 branches hit
+![instrumentation for destroy().before](/readme_files/instrumentation_destroy_before.png)
+
+_setCropBoxData() in methods.js_
+
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/29504125670cb953b2c235056fe3381187bbbe2d)(should uncomment out test lines)
+
+0/2 branches hit (of the uncovered branches, where branch 1 and 4 is one branch and 2 and 3 is another)
+![instrumentation for destroy().before](/readme_files/instrumentation_setCropBoxData_before.png)
 
 <b>Hums Awan</b>
 
