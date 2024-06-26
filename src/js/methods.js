@@ -81,6 +81,7 @@ window.destroyBranchCoverage = {
 window.setCropBoxDataBranchCoverage = {
     "branch 1: widthChanged": false,
     "branch 2: heightChanged": false,
+    "branch 3: aspectRatio && !widthChanged && !heightChanged": false,
 }
 
 function printGetCroppedCanvasCoverage() {
@@ -736,6 +737,7 @@ export default {
           setCropBoxDataCoverage.heightChanged = true;
           cropBoxData.width = cropBoxData.height * aspectRatio;
         }
+        window.setCropBoxDataBranchCoverage["branch 3: aspectRatio && !widthChanged && !heightChanged"] = true;
       }
 
       this.renderCropBox();
