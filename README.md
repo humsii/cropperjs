@@ -183,12 +183,13 @@ The test suite covered 4 of 4 branches, covering 2 more branches compared to the
 _setCropBoxData() in methods.js_
 
 [Link to commit with improved test suite](https://github.com/humsii/cropperjs/commit/3cdabe15987060ee49967b9f4b9e14249eef46d5)
+
 [Link to commit with improved test suite + third branch coverage](https://github.com/humsii/cropperjs/commit/29bf73a6142f0a3da0743a36a0c6360f72298c75)
 
 - Previous coverage result (1/3 branches hit)<br>
   ![instrumentation for replace().before](/readme_files/instrumentation_setCropBoxData_before_v3.png)
 - New coverage result (3/3 branches hit)<br>
-  ![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after_v2.png)
+  ![instrumentation for replace().after](/readme_files/instrumentation_setCropBoxData_after_v3.png)
 
 The test suite covered 3 of 3 branches, covering 2 more branches compared to the previous test suite. It improved from covering no branches at all to covering all branches in _setCropBoxData()_. The function coverage is now 100%.
 
