@@ -243,6 +243,7 @@ The test suite covered 6 OF 6 branches, covering 2 more branches compared to the
 
 ### Overall
 
+Our full statement coverage went from 72.82% to 76.45%, while we covered 41 more branches, increasing the branch coverage to 66.54% from 63.55%.
 #### Coverage Before, Overall:
 
 ![coverage_before](/readme_files/cropper_coverage_before.jpg)
