@@ -107,7 +107,7 @@ _setCropBoxData() in methods.js_
 
 _init() in cropper.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/8939912ba6eccc5b76ce7731fdaab7629e869959)
 
 3/6 branches hit
 
@@ -115,7 +115,7 @@ _init() in cropper.js_
 
 _unbuild() in cropper.js_
 
-[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/960fc91c70f11ef41fd1951b08f8df1f7ec80c21)
+[Link to commit with instrumented code](https://github.com/humsii/cropperjs/commit/8939912ba6eccc5b76ce7731fdaab7629e869959)
 
 2/3 branches hit
 
