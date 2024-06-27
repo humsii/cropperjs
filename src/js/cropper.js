@@ -55,6 +55,14 @@ window.unbuildCoverage = {
   "branch 3: parentNode exists": false,
 };
 
+window.uncreateCoverage = {
+  "branch 1: ready": false,
+  "branch 2: sizing": false,
+  "branch 3: reloading": false,
+  "branch 4: image": false,
+  "branch 5: nothing": false
+};
+
 function printInitCoverage() {
   console.log('init coverage:');
   for (const [branch, hit] of Object.entries(window.initCoverage)) {
@@ -69,9 +77,16 @@ function printUnbuildCoverage() {
   }
 }
 
+function printUncreateCoverage() {
+  console.log('uncreate coverage:');
+  for (const [branch, hit] of Object.entries(window.uncreateCoverage)) {
+    console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+  }
+}
+
 export { printInitCoverage };
 export { printUnbuildCoverage };
-
+export { printUncreateCoverage };
 
 class Cropper {
   /**
@@ -458,18 +473,25 @@ class Cropper {
 
   uncreate() {
     if (this.ready) {
+      window.uncreateCoverage["branch 1: ready"] = true;
       this.unbuild();
       this.ready = false;
       this.cropped = false;
     } else if (this.sizing) {
+      window.uncreateCoverage["branch 2: sizing"] = true;
       this.sizingImage.onload = null;
       this.sizing = false;
       this.sized = false;
     } else if (this.reloading) {
+      window.uncreateCoverage["branch 3: reloading"] = true;
       this.xhr.onabort = null;
       this.xhr.abort();
     } else if (this.image) {
+      window.uncreateCoverage["branch 4: image"] = true;
       this.stop();
+    }
+    else {
+      window.uncreateCoverage["branch 5: nothing"] = true;
     }
   }
 

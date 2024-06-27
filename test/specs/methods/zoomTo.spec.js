@@ -1,4 +1,8 @@
+import Cropper from '../../../src/js/cropper';
+import { printZoomToCoverage } from '../../../src/js/methods';
+
 describe('zoomTo (method)', () => {
+
   it('should zoom to the certain ratio', (done) => {
     const image = window.createImage();
     const cropper = new Cropper(image, {
@@ -30,4 +34,9 @@ describe('zoomTo (method)', () => {
       },
     });
   });
+ 
+  after(() => {
+    printZoomToCoverage();
+  });
+  
 });

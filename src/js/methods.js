@@ -84,6 +84,15 @@ window.setCropBoxDataBranchCoverage = {
     "branch 3: aspectRatio && !widthChanged && !heightChanged": false,
 }
 
+window.zoomToCoverage = {
+  "branch 1: canZoom": false,
+  "branch 2: !dispatchEvent": false,
+  "branch 3: _originalEvent": false,
+  "branch 4: isPlainObject, areNumbers": false,
+  "branch 5: zoomFromCenter": false,
+  "branch 6: cannotZoom": false
+}
+
 function printGetCroppedCanvasCoverage() {
   console.log('getCroppedCanvas coverage:');
     for (const [branch, hit] of Object.entries(getCroppedCanvasCoverage)) {
@@ -112,10 +121,18 @@ function printSetCropBoxDataCoverage() {
     }
 }
 
+function printZoomToCoverage() {
+  console.log('zoomTo coverage:');
+    for (const [branch, hit] of Object.entries(zoomToCoverage)) {
+      console.log(`${branch}: ${hit ? 'hit' : 'not hit'}`);
+    }
+}
+
 export { printGetCroppedCanvasCoverage };
 export { printReplaceCoverage };
 export { printDestroyCoverage };
 export { printSetCropBoxDataCoverage };
+export { printZoomToCoverage };
 
 export default {
   // Show the crop box manually
@@ -360,6 +377,7 @@ export default {
     ratio = Number(ratio);
 
     if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
+      window.zoomToCoverage["branch 1: canZoom"] = true;
       const newWidth = naturalWidth * ratio;
       const newHeight = naturalHeight * ratio;
 
@@ -368,10 +386,12 @@ export default {
         oldRatio: width / naturalWidth,
         originalEvent: _originalEvent,
       }) === false) {
+        window.zoomToCoverage["branch 2: !dispatchEvent"] = true;
         return this;
       }
 
       if (_originalEvent) {
+        window.zoomToCoverage["branch 3: _originalEvent"] = true;
         const { pointers } = this;
         const offset = getOffset(this.cropper);
         const center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
@@ -387,6 +407,7 @@ export default {
           ((center.pageY - offset.top) - canvasData.top) / height
         );
       } else if (isPlainObject(pivot) && isNumber(pivot.x) && isNumber(pivot.y)) {
+        window.zoomToCoverage["branch 4: isPlainObject, areNumbers"] = true;
         canvasData.left -= (newWidth - width) * (
           (pivot.x - canvasData.left) / width
         );
@@ -394,6 +415,7 @@ export default {
           (pivot.y - canvasData.top) / height
         );
       } else {
+        window.zoomToCoverage["branch 5: zoomFromCenter"] = true;
         // Zoom from the center of the canvas
         canvasData.left -= (newWidth - width) / 2;
         canvasData.top -= (newHeight - height) / 2;
@@ -402,6 +424,9 @@ export default {
       canvasData.width = newWidth;
       canvasData.height = newHeight;
       this.renderCanvas(true);
+    }
+    else {
+      window.zoomToCoverage["branch 6: cannotZoom"] = true;
     }
 
     return this;
