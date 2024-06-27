@@ -34,6 +34,50 @@ describe('zoomTo (method)', () => {
       },
     });
   });
+
+  it('should zoom to the given ratio with pivot', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        const pivot = { x: 0, y: 0 };
+        const initialCanvasData = cropper.getCanvasData();
+        cropper.zoomTo(2, pivot);
+        const canvasData = cropper.getCanvasData();
+  
+        const expectedWidth = initialCanvasData.naturalWidth * 2;
+        const expectedHeight = initialCanvasData.naturalHeight * 2;
+  
+        expect(canvasData.width).to.equal(expectedWidth);
+        expect(canvasData.height).to.equal(expectedHeight);
+        done();
+      },
+    });
+  });
+
+  it('should zoom with _originalEvent', (done) => {
+    const image = window.createImage();
+    const cropper = new Cropper(image, {
+      ready() {
+        const pivot = { x: 0, y: 0 };
+        const originalEvent = {
+          pageX: 0,
+          pageY: 0,
+        };
+
+        const initialCanvasData = cropper.getCanvasData();
+        cropper.zoomTo(2, pivot, originalEvent);
+        const canvasData = cropper.getCanvasData();
+
+        const expectedWidth = initialCanvasData.naturalWidth * 2;
+        const expectedHeight = initialCanvasData.naturalHeight * 2;
+
+        expect(canvasData.width).to.equal(expectedWidth);
+        expect(canvasData.height).to.equal(expectedHeight);
+
+        done();
+      },
+    });
+  });
  
   after(() => {
     printZoomToCoverage();
