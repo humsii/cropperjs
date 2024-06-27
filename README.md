@@ -129,7 +129,7 @@ _uncreate in cropper.js_
 
 ![instrumentation for uncreate().before](/readme_files/instrumentation_uncreate_before.png)
 
-1/5 branches hit
+2/5 branches hit
 
 _zoomTo in methods.js_
 
